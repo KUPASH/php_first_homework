@@ -25,23 +25,25 @@
     }
     $handle = fopen('tasks.txt', 'r');
     echo '<table border="1">';
-    $counter = 1;
+    $counter = 0;
+    $counter1 = 0;
     while(($b = fgets($handle)) !== false) {
         echo '<tr><td>'.$b.'</td>
-                  <td><a href="redirect.php?id='.$counter++.'">X</a></td></tr>';
+                  <td><a href="redirect.php?id='.$counter++.'">X</a></td>
+                  <td><input name="update"></td>
+                  <td><a href="update.php?id='.$counter1++.'">Update</a></td></tr>';
 
     }
     echo '</table>';
     fclose($handle);
 
-    $num_string = 1;
-    $file = file('tasks.txt');
-    unset($file[$num_string]);
-    file_put_contents('tasks.txt', implode("", $file) );
+
+
 
 
 
 
     ?>
+
 </body>
 </html>
