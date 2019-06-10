@@ -1,3 +1,8 @@
+<?php
+ini_set('display_errors', true);
+ini_set('display_startup_errors', true);
+error_reporting(E_ALL);
+?>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -15,12 +20,10 @@
 <body class="<?=$class?>">
     <form>
         New task: <input name="task">
-        <button type="submit">Create</button> </br>
-        <input name="update">
-        <button type="submit">Update</button>
+        <button type="submit">Create</button>
     </form>
     <?
-    if ($_GET['task']) {
+    if (isset($_GET['task'])) {
         $handle = fopen('tasks.txt', 'a');
         fputs($handle, $_GET['task'] . PHP_EOL);
         fclose($handle);
@@ -28,28 +31,14 @@
     $handle = fopen('tasks.txt', 'r');
     echo '<table border="1">';
     $counter = 0;
-    while(($b = fgets($handle)) !== false) {
-        echo '<tr><td>'.$b.'</td>
-                  <td><a href="redirect.php?id='.$counter++.'">X</a></td></tr>';
+    while(($line = fgets($handle)) !== false) {
+        echo '<tr><td>'.$line.'</td>
+                  <td><a href="delete.php?id='.$counter.'">X</a></td>
+                  <td><a href="modified.php?id='.$counter.'">Modified</a></td></tr>';
+        $counter ++;
     }
     echo '</table>';
     fclose($handle);
-
-    if ($_GET['update']) {
-        $handle = fopen('tasks.txt', 'w');
-        fputs($handle, $_GET['update'] . PHP_EOL);
-        fclose($handle);
-    }
-
-
-
-
-
-
-
-
-
-
     ?>
 
 </body>
