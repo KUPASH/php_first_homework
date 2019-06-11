@@ -9,9 +9,11 @@ error_reporting(E_ALL);
 </head>
 <body>
     <?php
-        $id = $_GET['id'];
-        $file = file('tasks.txt');
-        $line = $file[$id];
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $file = file('tasks.txt');
+            $line = $file[$id];
+        }
     ?>
 
     <form action="save.php">
