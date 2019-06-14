@@ -6,7 +6,9 @@ error_reporting(E_ALL);
 if (isset($_GET['id'])) {
     $num_string = $_GET['id'];
     $file = file('tasks.txt');
-    unset($file[$num_string]);
+    if (isset($file[$num_string])) {
+        unset($file[$num_string]);
+    }
     file_put_contents('tasks.txt', implode("", $file) );
 }
 

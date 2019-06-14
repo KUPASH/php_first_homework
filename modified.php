@@ -12,7 +12,9 @@ error_reporting(E_ALL);
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $file = file('tasks.txt');
-            $line = $file[$id];
+            if(isset($file[$id])) {
+                $line = $file[$id];
+            }
         }
     ?>
 
